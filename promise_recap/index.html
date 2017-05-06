@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>promise recap in prep for mongod</title>
+  </head>
+  <body>
+    <button>CLICK</button>
+
+    <script>
+      //the ES5 vanilla way
+      //console.log('hello promise');
+      /*let counter = 0;
+
+      document.querySelector('button').addEventListener('click', () => { counter++;});
+
+      setTimeout(() => {
+        counter > 5 ? alert('won. you clicked '+counter) : alert('lost you clicked '+counter)
+      }, 2000);
+      */
+
+      //the ES6 way async
+      function startGame() {
+        let counter = 0;
+
+        document.querySelector('button').addEventListener('click', () => { counter++;});
+
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            counter > 5 ? resolve() : reject()
+          }, 2000)
+        });
+      }
+      startGame()
+      .then(() => alert('won'))
+      .catch(() => alert('lost'));
+
+    </script>
+  </body>
+</html>
