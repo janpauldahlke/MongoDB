@@ -18,7 +18,9 @@ describe('Creating records', () => {
       //instance object of User!! oneliner, spread it with more attribs later on
       //but jan will not be saved /persisted
       const jan = new User({ name: 'Jan' });
-      //step 2 of TODO
+      //step 2 of TODO //nice and easy(?)
       jan.save();
+      //!!!!each iteration of this will create a new user again!! so care the doubling data by accidnent
+
   });
 });
