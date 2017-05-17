@@ -37,6 +37,21 @@ describe('deleting a user', () => {
       });
   });
 
-  it('Class Method findAndRemove', (done) => {});
-  /*it('Class Method findByIDAndRemove', (done) => {});*/
+  it('Class Method findOneAndRemove', (done) => {
+    User.findOneAndRemove({name: 'John'})
+      .then(() => User.findOne({name: 'John'}))
+      .then((user) => {
+        assert(user === null);
+        done();
+      });
+  });
+
+  it('Class Method findByIDAndRemove', (done) => {
+    User.findByIdAndRemove(john._id)
+      .then(() => User.findOne({name: 'John'}))
+      .then((user) => {
+        assert(user === null);
+        done();
+      });
+  });
 });
