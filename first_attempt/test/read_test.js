@@ -23,7 +23,11 @@ describe('Reading Users out of DB', () => {
     // User.find() e.g.
     User.find({name : 'Joe'})
       .then((users) => {
-        console.log(users);
+        console.log(users[0]._id, joe._id);
+        //THIS cannot work, because mongoDb wraps IDs with Object IDs
+        //even if IDs are as String identical the Object ID is different
+        //a helper is toString() here
+        assert(users[0]._id.toString() === joe._id.toString());
         done();
       });
   });
