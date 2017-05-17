@@ -10,8 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mocha": "^3.3.0",
-    "mongoose": "^4.9.7",
+    "mocha": "^3.1.2",
+    "mongoose": "^4.6.6",
     "nodemon": "^1.11.0"
   }
 }

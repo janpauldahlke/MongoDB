@@ -10,16 +10,43 @@ run tests after successful connect
 
 //require mongoose npm module
 const mongoose = require('mongoose');
+//plugin own Promise Libary ES6 Promise due deprecation warning
+mongoose.Promise = global.Promise;
+
 //connect and give the arg the information explicitly where to find the db
 //in case of remote connection this string needs to be mongodb://ip:port/name
 //while connecting and inserting some value, the instance will be createt by mongoose
-mongoose.connect('mongodb://localhost/users_test');
+//mongoose.connect('mongodb://localhost/users_test');
 //promise here on connection()
 //how long does it take to connect? async w8 for
-mongoose.connection
+//mongoose.connection
   //once -> log
-  .once('open', () => console.log('good to go'))
+  //.once('open', () => { })
   //on error, throw error
-  .on('error', (err) => {
-    console.log('Error: ',err);
+  //.on('error', (err) => {
+  //  console.log('Error: ',err);
+  //});
+
+  //TODO rewrite this into before
+before((done) => {
+  mongoose.connect('mongodb://localhost/users_test');
+  mongoose.connection
+    .once('open', () => { done();})
+    .on('error', (err) => {
+      console.log('Error: ',err);
+    });
+});
+
+
+
+//TODO add hook
+//hook = executed before the testsuites run
+beforeEach( (done) => {
+  //direct call to drop all users
+  //due async we need to make mocha w8 for the drop
+  //use mocha done() callback
+  mongoose.connection.collections.users.drop(() => {
+    //run next test
+    done();
   });
+});

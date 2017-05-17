@@ -4,7 +4,7 @@
 const mongoose = require('mongoose');
 
 //pull specific property of the mongoose object -> schema
-const Schema =mongoose.Schema;
+const Schema = mongoose.Schema;
 
 //define user and use schema object with config
 const UserSchema = new Schema({
