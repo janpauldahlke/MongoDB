@@ -61,7 +61,30 @@ and save would be called in the end, w/o touching our database twice
 */
 
   //model instance can update
-it('a model instance can update', (done) => {
+  it('a model instance can update', (done) => {
     assertName(paul.update({name: newName}), done);
   });
+
+  //--------------------//
+  //class based updates
+  it('A model class can update', (done) =>{
+      //needs to be called on User-Class
+      //update with object 1st arg= waht are we looking for, 2nd arg is what to replace it with
+    assertName(User.update({name: 'Paul'}, {name: newName}),
+    done);
+  });
+
+  //findOneAndUpdate
+  it('A model class can update one record', (done) =>{
+    assertName(User.findOneAndUpdate({name: 'Paul'}, {name: newName}),
+      done);
+  });
+
+  //findByIDAndUpdate
+  it('A model class can find by ID and update', (done) =>{
+      //2 args, 1. find what, 2. update with
+    assertName(User.findByIdAndUpdate(paul._id, {name: newName}),
+    done);
+  });
+
 });
