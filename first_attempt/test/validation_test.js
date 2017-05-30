@@ -31,7 +31,22 @@ describe('Validating records in the database', () => {
     const { message } = validationResult.errors.name;
     console.log(message);
     //message is equal to the message from validate object message from validation_test
-    assert(message === 'Name must be longer then 2 characters!') ;
+    assert(message === 'Name must be longer then 2 characters!');
+  });
+
+  //practie example
+  //if recors is invalid, it should not be saved!
+  it('invalid records can not be saved to the database', (done) => {
+    const user = new User({name : 'AI'});
+
+    user.validate((validationResult) =>
+      user.save().
+        catch((validationResult) => {
+          const message = validationResult.errors.name.message;
+          assert(message === 'Name must be longer then 2 characters!');
+          done();
+        })
+      )
   });
 
 });
