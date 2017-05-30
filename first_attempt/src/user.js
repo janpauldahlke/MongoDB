@@ -2,12 +2,12 @@
 
 //req mongoose module
 const mongoose = require('mongoose');
-
+//import PostSchema
+const PostSchema = require('./post');
 //pull specific property of the mongoose object -> schema
 const Schema = mongoose.Schema;
 
-//import PostSchema
-const PostSchema = require('./post');
+
 
 //define user and use schema object with config
 const UserSchema = new Schema({
