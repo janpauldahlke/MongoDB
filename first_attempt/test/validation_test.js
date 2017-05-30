@@ -25,8 +25,13 @@ describe('Validating records in the database', () => {
     */
   });
 
-  /*it('username is longer then 2 characters', (done) => {
-
-  });*/
+  it('username is longer then 2 characters', (/*done*/) => {
+    const user = new User({ name : 'AI'});
+    const validationResult = user.validateSync();
+    const { message } = validationResult.errors.name;
+    console.log(message);
+    //message is equal to the message from validate object message from validation_test
+    assert(message === 'Name must be longer then 2 characters!') ;
+  });
 
 });

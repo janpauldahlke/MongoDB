@@ -13,8 +13,18 @@ const UserSchema = new Schema({
   //validation of name in validation_test.js
   name : {
     type : String,
-    //required flag from
-    required : [true, 'provide a user name: name is required!']
+    //required flag from mongoose
+    //http://mongoosejs.com/docs/validation.html
+    required : [true, 'provide a user name: name is required!'],
+
+    //TODO name >= 3chars
+    //as object
+    validate : {
+      //rule
+      validator : (name) => name.length > 2,
+      //message in error case
+      message : 'Name must be longer then 2 characters!'
+    }
   },
   postCount : Number
 });
