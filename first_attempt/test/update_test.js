@@ -6,7 +6,10 @@ describe('update records in the Database', () => {
   const newName = 'Paul Johannes'
   //create some entry to test against
   beforeEach((done) => {
-      paul = new User({name: 'Paul'});
+      paul = new User(
+        { name: 'Paul',
+          postCount: 0
+        });
       paul.save()
         .then(() => {
           done();
@@ -87,4 +90,35 @@ and save would be called in the end, w/o touching our database twice
     done);
   });
 
+  //--increment postCount
+
+  it('it is possible to update the users PostCount with increment', (done) => {
+    //e.g.
+    //paul.set('postCount', 1);
+    //User.update({name: 'Paul'}, {postCount : 1})
+    //but this is not incrementing it is setting! and would reset every postcount
+
+    //TODO find every user with given name, load it onto server and increment by one
+    //!best pratice; reason: every user needs to be loaded and saved what makes it slow, so dont!
+
+    //TODO check
+    //https://docs.mongodb.com/manual/reference/operator/update/
+    //update modifiers = operators (terminolgy)
+    /*
+     <operator1>: { <field1>: <value1>, ... },
+     <operator2>: { <field2>: <value2>, ... },
+     */
+     //useful for updating more then one record at once, perfermance gain
+
+      User.update({name: 'Paul'},
+      //operator $inc as 2nd arg
+      //negaitve is $inc with negaitve numbers like {$inc {postCount: -}}
+      { $inc: {postCount: 42} })
+        .then( () =>
+        User.findOne({name: 'Paul'}) )
+        .then( (user) => {
+          assert(user.postCount === 42);
+          done();
+        });
+      });
 });

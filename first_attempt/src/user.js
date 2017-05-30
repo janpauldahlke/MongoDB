@@ -9,7 +9,8 @@ const Schema = mongoose.Schema;
 //define user and use schema object with config
 const UserSchema = new Schema({
   //key : datatype
-  name: String
+  name: String,
+  postCount : Number
 });
 
 //init user model, name it, pass UserSchema
