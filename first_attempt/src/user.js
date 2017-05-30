@@ -6,6 +6,9 @@ const mongoose = require('mongoose');
 //pull specific property of the mongoose object -> schema
 const Schema = mongoose.Schema;
 
+//import PostSchema
+const PostSchema = require('./post');
+
 //define user and use schema object with config
 const UserSchema = new Schema({
   //key : datatype
@@ -26,7 +29,9 @@ const UserSchema = new Schema({
       message : 'Name must be longer then 2 characters!'
     }
   },
-  postCount : Number
+  postCount : Number,
+  //give UserSchema the information that posts have multiple [] PostSchema
+  posts: [PostSchema]
 });
 
 //init user model, name it, pass UserSchema

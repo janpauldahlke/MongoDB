@@ -3,3 +3,5 @@
 navigat to folders for thoughts in detail
 - promise_recap/ -> make sure promises are clear
 - first_attempt/ -> use mocha to test mongoose connection
+  - test methods // destroy update update create
+  - add subdocument blogpost to user 
