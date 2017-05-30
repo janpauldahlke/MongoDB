@@ -9,7 +9,13 @@ const Schema = mongoose.Schema;
 //define user and use schema object with config
 const UserSchema = new Schema({
   //key : datatype
-  name: String,
+  //name: String,
+  //validation of name in validation_test.js
+  name : {
+    type : String,
+    //required flag from
+    required : [true, 'provide a user name: name is required!']
+  },
   postCount : Number
 });
 
