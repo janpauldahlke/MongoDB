@@ -31,12 +31,25 @@ describe('Associations', () => {
       .then(() => done());
   });
 
-  it('saves a relation between user and blogpost', (done) =>{
-    User.findOne({name: 'Paul'})
+  //mocha run only this test it.only
+  it.only('saves a relation between user and blogpost', (done) =>{
+    //User -> find record with criteria findOne({//}) -> modifier(BlogPost) -> then(exec)
+    //modifiers load more data then only user and blogpost Association
+    /*User.findOne({name: 'Paul'})
       .then((user) => {
         console.log(user);
         done();
-      })
+      })*/
+      //this time with modifiers populate()
+      //http://mongoosejs.com/docs/populate.html
+      User
+        .findOne({name: 'Paul'})
+        .populate('blogPosts')
+        .then((user) => {
+          console.log(user);
+          done();
+        })
+
   });
 
   /*
