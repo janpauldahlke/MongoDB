@@ -77,8 +77,13 @@ describe('Associations', () => {
         }
       })
       .then((user) => {
-        //console.log(user);
-        //console.log(user.blogPosts[0]);
+        /*console.log('1 ',user);
+        console.log('2', user.blogPosts[0]);
+        console.log('3', user.blogPosts[0].comments[0]);*/
+        //assert one prop each
+        assert(user.name === 'Paul');
+        assert(user.blogPosts[0].content === contentQuestion);
+        assert(user.blogPosts[0].comments[0].content === 'this might be valid.');
         done();
       })
   });
