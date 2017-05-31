@@ -38,7 +38,14 @@ const UserSchema = new Schema({
   //give UserSchema the information that posts have multiple [] PostSchema
   posts: [PostSchema],
   //make the update increment test work again
-  likes: Number
+  likes: Number,
+  //refers to Comment
+  blogPosts: [{
+    type: Schema.Types.ObjectId,
+    //refers to blogPost.js
+    //const BlogPost = mongoose.model('blogPost', BlogPostSchema);
+    ref: 'blogPost'
+  }]
 });
 
 //virtual prop definition here

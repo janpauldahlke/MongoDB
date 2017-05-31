@@ -41,12 +41,27 @@ before((done) => {
 
 //TODO add hook
 //hook = executed before the testsuites run
+
+//TODO drop all collections of BlogPost and Comment
+
 beforeEach( (done) => {
   //direct call to drop all users
   //due async we need to make mocha w8 for the drop
   //use mocha done() callback
-  mongoose.connection.collections.users.drop(() => {
-    //run next test
+
+  const { users, comments, blogPosts } = mongoose.connection.collections;
+
+  /*mongoose.connection.collections.users.drop(() => {
     done();
+  });*/
+
+  //not the best nesting but works
+  //this is rewritable
+  users.drop(() => {
+    comments.drop(() => {
+      blogPosts.drop(() => {
+        done();
+      });
+    });
   });
 });

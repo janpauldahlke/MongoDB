@@ -6,6 +6,7 @@ const BlogPost = new Schema({
   content: String,
   comments : [{
     //points to a different Collection ('Comment')
+    //http://mongoosejs.com/docs/schematypes.html
     type: Schema.Types.ObjectId,
     //ref (mongoose specific) - wires ID from type with ref with Comment Model
     //refers to comment.js
