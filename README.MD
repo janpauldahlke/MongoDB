@@ -1,5 +1,6 @@
 ## contemplation about mongoDB
 
+
 ![Inception](http://i1.kym-cdn.com/photos/images/facebook/000/531/557/a88.jpg)
 
 navigat to folders for thoughts in detail
