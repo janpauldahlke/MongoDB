@@ -93,7 +93,7 @@ and save would be called in the end, w/o touching our database twice
   //--increment postCount
   // this test breaks with introduction of virtual types//
   //make it xit -- mocha will ignore xit
-  it('it is possible to update the users PostCount with increment', (done) => {
+  it('it is possible to update the users LIKES with increment', (done) => {
     //e.g.
     //paul.set('postCount', 1);
     //User.update({name: 'Paul'}, {postCount : 1})
