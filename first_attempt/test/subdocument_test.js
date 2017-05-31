@@ -48,4 +48,34 @@ describe('subdocuments', () => {
               done();
           });
       });
+
+
+      it('it is possible to delete a post/subdocument from an existing record', (done) => {
+        //create user with post subdocument
+        const paul = new User({
+          name: 'Paul',
+          posts: [{title: 'title to be removed'}]
+        });
+
+          //save user
+          paul.save()
+          //fetch
+            .then(()=> User.findOne({name:'Paul'}))
+            //https://stackoverflow.com/questions/5809788/how-do-i-remove-documents-using-node-js-mongoose
+            //remove subdocument here // do not use slice here! painful
+            //better to use remove()
+            //do not get consfused with paul.remove() what persists in DB
+            .then((user) => {
+              user.posts[0].remove();
+              return user.save();
+            })
+            //fetch
+            .then(() => User.findOne({name: 'Paul'}))
+            //assertion
+            .then((user) => {
+              assert(user.posts.length === 0);
+              done();
+            });
+      });
+
 });
