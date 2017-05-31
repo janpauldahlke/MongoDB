@@ -15,12 +15,14 @@ describe('Associations', () => {
 
     //TODO associate paul with blogPost
     //because blogPosts is an array on joe, so just push it // some mongoose magic!?
-
     joe.blogPosts.push(blogPost);
 
     //TODO associate blogPost with comment
     blogPost.comments.push(comment);
 
+    //TODO associate paul with comment
+    //magic again !?
+    comment.user = paul;
   });
 
   /*it('', () =>{
