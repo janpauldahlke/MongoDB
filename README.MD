@@ -8,4 +8,5 @@ navigat to folders for thoughts in detail
 - first_attempt/ -> use mocha to test mongoose connection
   - test methods // destroy update update create
   - add subdocument blogpost to user
-- implement BLogPost and Comment as new Collections  
+- implement BLogPost and Comment as new Collections
+- recap how to reach associated collections

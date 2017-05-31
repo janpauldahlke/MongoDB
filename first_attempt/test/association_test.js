@@ -56,7 +56,7 @@ describe('Associations', () => {
   });
 
   //careful with this approach it might take very long if deeply nested
-  it.only('saves a full relation(graph) between a user, a blogpost and a comment', (done) =>{
+  it('saves a full relation(graph) between a user, a blogpost and a comment', (done) =>{
     User
       .findOne({name: 'Paul'})
       //modifier with configuration object
@@ -84,6 +84,7 @@ describe('Associations', () => {
         assert(user.name === 'Paul');
         assert(user.blogPosts[0].content === contentQuestion);
         assert(user.blogPosts[0].comments[0].content === 'this might be valid.');
+        assert(user.blogPosts[0].comments[0].user.name === 'Paul');
         done();
       })
   });
