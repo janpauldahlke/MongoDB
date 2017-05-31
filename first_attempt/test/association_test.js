@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const assert = require('assert');
 const User = require('../src/user');
 const Comment = require('../src/comment');
@@ -32,7 +33,7 @@ describe('Associations', () => {
   });
 
   //mocha run only this test it.only
-  it.only('saves a relation between user and blogpost', (done) =>{
+  it('saves a relation between user and blogpost', (done) =>{
     //User -> find record with criteria findOne({//}) -> modifier(BlogPost) -> then(exec)
     //modifiers load more data then only user and blogpost Association
     /*User.findOne({name: 'Paul'})
@@ -44,17 +45,42 @@ describe('Associations', () => {
       //http://mongoosejs.com/docs/populate.html
       User
         .findOne({name: 'Paul'})
+        //resolve the blogPosts relation comes from User Model property name blogPosts
         .populate('blogPosts')
         .then((user) => {
-          console.log(user);
+          //console.log(user);
+          //console.log(user.blogPosts[0]);
+          assert(user.blogPosts[0].title === 'the meaning of life');
           done();
-        })
-
+        });
   });
 
-  /*
-  it('', () =>{
+  //careful with this approach it might take very long if deeply nested
+  it.only('saves a full relation(graph) between a user, a blogpost and a comment', (done) =>{
+    User
+      .findOne({name: 'Paul'})
+      //modifier with configuration object
+      .populate({
+        //look into user object, find blogPosts and populate this with further object
+        //read this like Userfindne, populate this with object, that 1st shows path to blogpsts and 2 .populate this path with comments
 
+        path: 'blogPosts',
+        populate: {
+          path: 'comments',
+          //and point to the model now
+          model: 'comment',
+          //inception http://i1.kym-cdn.com/photos/images/facebook/000/531/557/a88.jpg
+          populate: {
+            path: 'user',
+            model: 'user'
+          }
+        }
+      })
+      .then((user) => {
+        //console.log(user);
+        //console.log(user.blogPosts[0]);
+        done();
+      })
   });
-  */
+
 });
