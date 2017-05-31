@@ -29,9 +29,29 @@ const UserSchema = new Schema({
       message : 'Name must be longer then 2 characters!'
     }
   },
-  postCount : Number,
+  //TODO reflect postCount depending from number of posts
+  //virtual types - will not be persistet
+  //calculate this on the fly
+  //https://stackoverflow.com/questions/32263222/virtual-field-and-real-field
+  //postCount : Number,
+
   //give UserSchema the information that posts have multiple [] PostSchema
   posts: [PostSchema]
+});
+
+//virtual prop definition here
+//they are seperate and outside of the UserSchema
+//use function instead of => on get() to use this
+//get() -> define getter on model (ES6 setter/getter)
+UserSchema.virtual('postCount').get(function() {
+  //return this;
+  //this refers to the instance of the model
+  //to do so use the function keyword not =>
+  // => would bind context to this whole file and not the instance
+  //use this carefully and keep it in mind!!
+  
+  return this.posts.length;
+
 });
 
 //init user model, name it, pass UserSchema
