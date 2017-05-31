@@ -15,21 +15,31 @@ describe('Associations', () => {
 
     //TODO associate paul with blogPost
     //because blogPosts is an array on joe, so just push it // some mongoose magic!?
-    joe.blogPosts.push(blogPost);
+    paul.blogPosts.push(blogPost);
 
     //TODO associate blogPost with comment
     blogPost.comments.push(comment);
 
     //TODO associate paul with comment
-    //magic again !?
+    //magic again !? mongoose internal setter
     comment.user = paul;
+
+    //saving() - done needs to be called as promise so use promise.all()
+    //https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
+    Promise.all([ paul.save(), blogPost.save(), comment.save()] )
+      //chain then to resolve
+      .then(() => done());
   });
 
-  /*it('', () =>{
-
+  it('saves a relation between user and blogpost', (done) =>{
+    User.findOne({name: 'Paul'})
+      .then((user) => {
+        console.log(user);
+        done();
+      })
   });
 
-
+  /*
   it('', () =>{
 
   });
