@@ -36,7 +36,9 @@ const UserSchema = new Schema({
   //postCount : Number,
 
   //give UserSchema the information that posts have multiple [] PostSchema
-  posts: [PostSchema]
+  posts: [PostSchema],
+  //make the update increment test work again
+  likes: Number
 });
 
 //virtual prop definition here
@@ -49,7 +51,7 @@ UserSchema.virtual('postCount').get(function() {
   //to do so use the function keyword not =>
   // => would bind context to this whole file and not the instance
   //use this carefully and keep it in mind!!
-  
+
   return this.posts.length;
 
 });

@@ -8,7 +8,7 @@ describe('update records in the Database', () => {
   beforeEach((done) => {
       paul = new User(
         { name: 'Paul',
-          postCount: 0
+          likes: 0
         });
       paul.save()
         .then(() => {
@@ -93,7 +93,7 @@ and save would be called in the end, w/o touching our database twice
   //--increment postCount
   // this test breaks with introduction of virtual types//
   //make it xit -- mocha will ignore xit
-  xit('it is possible to update the users PostCount with increment', (done) => {
+  it('it is possible to update the users PostCount with increment', (done) => {
     //e.g.
     //paul.set('postCount', 1);
     //User.update({name: 'Paul'}, {postCount : 1})
@@ -114,11 +114,11 @@ and save would be called in the end, w/o touching our database twice
       User.update({name: 'Paul'},
       //operator $inc as 2nd arg
       //negaitve is $inc with negaitve numbers like {$inc {postCount: -}}
-      { $inc: {postCount: 42} })
+      { $inc: {likes: 42} })
         .then( () =>
         User.findOne({name: 'Paul'}) )
         .then( (user) => {
-          assert(user.postCount === 42);
+          assert(user.likes === 42);
           done();
         });
       });
