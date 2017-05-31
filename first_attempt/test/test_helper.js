@@ -49,7 +49,7 @@ beforeEach( (done) => {
   //due async we need to make mocha w8 for the drop
   //use mocha done() callback
 
-  const { users, comments, blogPosts } = mongoose.connection.collections;
+  const { users, comments, blogposts } = mongoose.connection.collections;
 
   /*mongoose.connection.collections.users.drop(() => {
     done();
@@ -57,9 +57,10 @@ beforeEach( (done) => {
 
   //not the best nesting but works
   //this is rewritable
+  //mongo cant drop multiple collections at the same time so is sequentielly
   users.drop(() => {
     comments.drop(() => {
-      blogPosts.drop(() => {
+      blogposts.drop(() => {
         done();
       });
     });
