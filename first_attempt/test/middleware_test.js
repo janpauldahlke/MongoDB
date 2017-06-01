@@ -17,12 +17,12 @@ describe('Middleware', () => {
       .then(() => done());
   });
   //
-  it.only('middleware cleans up existing blogPosts on users remove', (done) => {
+  it('middleware cleans up existing blogPosts on users remove', (done) => {
     paul.remove()
     //https://docs.mongodb.com/manual/reference/method/db.collection.count/
       .then(() => BlogPost.count())
       .then((count) => {
-        console.log('-->', count)
+        //console.log('-->', count)
         assert(count === 0);
         done();
       });
