@@ -74,7 +74,8 @@ UserSchema.pre('remove', function (next) {
   //do not iterate over all given blogpost and delete some id', but make use of
   //https://docs.mongodb.com/manual/reference/operator/query/in/#op._S_in
   // this === paul
-  BlogPost.remove({__id: { $in: this.blogPosts}})
+  BlogPost.remove({ _id: { $in: this.blogPosts } })
+
   //middleware is async so we need next() function serial middleware
     .then(() => next() );
 });
