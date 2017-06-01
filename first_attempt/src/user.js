@@ -63,6 +63,22 @@ UserSchema.virtual('postCount').get(function() {
 
 });
 
+//adding middleware http://mongoosejs.com/docs/middleware.html
+//watch UserSchema, pre() before name of event 'save' 'remove'
+//this is instance of user so use function() not =>
+UserSchema.pre('remove', function (next) {
+  //to prevent circle requires just makeuse of blogpost model here for removing
+  //only in case this function is called, the model will be loaded, what is not at the begin of the applcation
+  const BlogPost = mongoose.model('blogPost');
+
+  //do not iterate over all given blogpost and delete some id', but make use of
+  //https://docs.mongodb.com/manual/reference/operator/query/in/#op._S_in
+  // this === paul
+  BlogPost.remove({__id: { $in: this.blogPosts}})
+  //middleware is async so we need next() function serial middleware
+    .then(() => next() );
+});
+
 //init user model, name it, pass UserSchema
 //terminolgy userModel = userClass // is not an instance!! represents entire collection of data
 //mongoose magic *puffPuff

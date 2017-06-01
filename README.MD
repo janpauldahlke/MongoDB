@@ -9,4 +9,5 @@ navigat to folders for thoughts in detail
   - test methods // destroy update update create
   - add subdocument blogpost to user
 - implement BLogPost and Comment as new Collections
-- recap how to reach associated collections
+- recap how to reach associated collections in with populate()
+- embed middleware to clean up associations of deleted user
