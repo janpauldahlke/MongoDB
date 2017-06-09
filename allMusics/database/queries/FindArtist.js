@@ -6,4 +6,8 @@ const Artist = require('../models/artist');
  * @return {promise} A promise that resolves with the Artist that matches the id
  */
 module.exports = (_id) => {
+
+  //find random artist
+  return Artist.findOne({_id});
+
 };

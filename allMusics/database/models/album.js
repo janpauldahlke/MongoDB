@@ -3,12 +3,12 @@ const Schema = mongoose.Schema;
 
 const AlbumSchema = new Schema({
   title: String,
-  date: String,
+  date: Date,  // https://docs.mongodb.com/manual/reference/method/Date/
   copiesSold: Number,
   numberTracks: Number,
   image: String,
-  revenue: Number
+  revenue: Number //currency
 });
 
-const Album = mongoose.Schema('album', AlbumSchema);
-module.exports = Album;
+//only schema due subdocument
+module.exports = AlbumSchema;
