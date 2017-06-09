@@ -7,4 +7,9 @@ const Artist = require('../models/artist');
  * @return {promise} A promise that resolves when the record is edited
  */
 module.exports = (_id, artistProps) => {
+  //http://mongoosejs.com/docs/api.html#model_Model.updateOne
+  return Artist.updateOne({_id: _id}, artistProps);
+
+  //update()
+  //return Artist.update({ _id:_id }, artistProps );
 };
