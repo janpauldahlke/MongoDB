@@ -22,12 +22,9 @@ module.exports = () => {
     .then(artists => artists[0].age);
 
   return Promise.all([minAge, maxAge])
-  //reolve into an object
+  //resolve into an object
     .then((result) => {
       return {min: result[0], max: result[1]};
     });
-
-    //resolve age on Artist: _id
-    
 
 };
