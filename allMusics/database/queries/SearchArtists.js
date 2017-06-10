@@ -14,11 +14,43 @@ module.exports = (criteria, sortProperty, offset = 0, limit = 20) => {
   /*const sortOrder = {};
   sortOrder[sortProperty] = 1;*/
 
-
-  const query = Artist.find({})
-    //if case of properties //ES6 interpolated property compare ES5 above
+  const query = Artist.find(buildQuery(criteria))
+    //if case of properties //ES6 interpolated property compare ES5 approach above
     .sort({ [sortProperty] : 1  })
     .skip(offset)
     .limit(limit);
-    
+
+  return Promise.all([query, Artist.count()])
+      .then((results) => {
+        return {
+          all : results[0],
+          count : results[1],
+          offset : offset,
+          limit : limit
+        };
+      });
+
+  //TODO add filter criteria //sidebar element GetAgeRange.js || GetYearsActiveRange.js
+  //refactor find(const buildQuery())
+
+};
+
+const buildQuery = (criteria) => {
+  const query = {};
+
+  if(criteria.age) {
+    //https://docs.mongodb.com/manual/reference/operator/query-modifier/
+    query.age = {
+      $gte : criteria.age.min,
+      $lte : criteria.age.max
+    }
+  }
+  if(criteria.yearsActive) {
+    query.yearsActive = {
+      $gte : criteria.yearsActive.min,
+      $lte : criteria.yearsActive.max
+    }
+  }
+
+  return query;
 };
