@@ -20,8 +20,9 @@ module.exports = (criteria, sortProperty, offset = 0, limit = 20) => {
     .skip(offset)
     .limit(limit);
 
-  //TODO show correct number //rewrite
-  return Promise.all([query, Artist.count()])
+  //TODO show correct number in pagination //rewrite
+  //DONE but, 2 querries!
+  return Promise.all([query, Artist.find(buildQuery(criteria)).count()])
       .then((results) => {
         return {
           all : results[0],
