@@ -6,4 +6,9 @@ const Artist = require('../models/artist');
  * @return {promise} A promise that resolves after the update
  */
 module.exports = (_ids) => {
+  //https://docs.mongodb.com/manual/reference/method/db.collection.updateMany/
+  return Artist.updateMany(
+    { _id: {$in : _ids} },
+    {retired : true}
+  );
 };

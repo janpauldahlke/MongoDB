@@ -20,6 +20,7 @@ module.exports = (criteria, sortProperty, offset = 0, limit = 20) => {
     .skip(offset)
     .limit(limit);
 
+  //TODO show correct number //rewrite
   return Promise.all([query, Artist.count()])
       .then((results) => {
         return {
