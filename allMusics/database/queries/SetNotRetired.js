@@ -6,4 +6,16 @@ const Artist = require('../models/artist');
  * @return {promise} A promise that resolves after the update
  */
 module.exports = (_ids) => {
+  /*return Artist.updateMany(
+    { _id: {$in : _ids} },
+    {retired : false}
+  );*/
+
+  //difference between updateMany() and update(y,x, {multi : true})
+
+  return Artist.update(
+    { _id: {$in : _ids} },
+    {retired : false},
+    { multi: true}
+  );
 };
