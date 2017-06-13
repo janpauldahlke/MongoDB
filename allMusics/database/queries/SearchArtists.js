@@ -38,6 +38,23 @@ module.exports = (criteria, sortProperty, offset = 0, limit = 20) => {
 const buildQuery = (criteria) => {
   const query = {};
 
+  //https://docs.mongodb.com/manual/reference/operator/query/text/
+  //!! use mongoSHell to create an index like below
+  //https://docs.mongodb.com/manual/indexes/
+  //indexes are supported only on one field atm in mongo!!
+  /* on mongo shell use upstar_music
+  > db.artists.createIndex({name: "text"})
+    {
+    	"createdCollectionAutomatically" : true,
+    	"numIndexesBefore" : 1,
+    	"numIndexesAfter" : 2,
+    	"ok" : 1
+    }
+  */
+  if(criteria.name) {
+    query.$text = { $search : criteria.name};
+  }
+
   if(criteria.age) {
     //https://docs.mongodb.com/manual/reference/operator/query-modifier/
     query.age = {
