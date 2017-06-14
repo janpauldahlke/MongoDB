@@ -5,7 +5,7 @@ const request = require('supertest');
 const app = require('../app');
 
 describe('The express app', () => {
-                //async, so need done
+                        //async, so need done
   it('handles a GET request to /api', (done) => {
     //format of supertest requests
     request(app)

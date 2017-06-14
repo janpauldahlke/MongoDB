@@ -4,7 +4,7 @@
   "description": "some excercises on exposing an API with node",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "nodemon --exec 'mocha --recursive -R nyan'"
   },
   "author": "jdahlke",
   "license": "ISC",
@@ -12,6 +12,7 @@
     "express": "^4.15.3",
     "mocha": "^3.4.2",
     "mongoose": "^4.10.6",
+    "nodemon": "^1.11.0",
     "supertest": "^3.0.0"
   }
 }
