@@ -12,7 +12,8 @@ describe('The express app', () => {
       .get('/api')
       //err is not! response error in stattuscode
       .end((err, response) => {
-        console.log(response);
+        //console.log(response);
+        assert(response.body.hello === 'world');
         done();
       });
   });
