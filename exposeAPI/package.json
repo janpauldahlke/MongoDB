@@ -1,0 +1,16 @@
+{
+  "name": "expose_api",
+  "version": "1.0.0",
+  "description": "some excercises on exposing an API with node",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "jdahlke",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.3",
+    "mocha": "^3.4.2",
+    "mongoose": "^4.10.6"
+  }
+}
