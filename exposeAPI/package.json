@@ -4,11 +4,13 @@
   "description": "some excercises on exposing an API with node",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon --exec 'mocha --recursive -R nyan'"
+    "test": "nodemon --exec 'mocha --recursive -R nyan'",
+    "start": "node index.js"
   },
   "author": "jdahlke",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "mocha": "^3.4.2",
     "mongoose": "^4.10.6",
