@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const DriverSchema = new Schema({
-  /*name: {
+  name: {
     type: String,
     required : true
-  },*/
+  },
   email : {
     type: String,
     required : true
