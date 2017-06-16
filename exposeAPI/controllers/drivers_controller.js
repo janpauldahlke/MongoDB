@@ -16,9 +16,12 @@ module.exports = {
 
   //! implement npm body-parser
   //test this with postman
-  create(req, res){
+  create(req, res, next){
     const driverProps = req.body;
+
     Driver.create(driverProps)
-      .then(driver => res.send(driver));
+      .then(driver => res.send(driver))
+      //added next to force next middleware // express error handling
+      .catch(next);
   }
 };

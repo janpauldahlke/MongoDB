@@ -28,7 +28,9 @@ routes(app);
 //res = response obj
 //next = is a function!! call it to force to goto next middleware
 app.use((err, req, res, next) => {
-  console.log(err);
+  //console.log(err);
+  //set status manually
+  res.status(422).send({error : err.message});
 });
 
 module.exports = app;
