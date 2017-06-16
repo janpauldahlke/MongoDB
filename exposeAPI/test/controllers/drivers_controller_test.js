@@ -35,4 +35,28 @@ describe('Drivers Controller', () => {
         });
       });
     });
+
+    it('PUT to /api/drivers/:id updates/edits the record', (done) => {
+      //create driver and test against him on update
+      //driving flag is default falsy
+      const driver = new Driver({name: "Kraut", email:"rüben@kraut.de"});
+      driver.save().
+        then(() => {
+          request(app)
+            //reflect id
+            //.put('/api/drivers/'+driver._id)
+            .put(`/api/drivers/${driver._id}`)
+            .send({driving: true})
+            .end(() => {
+              //get driver and assert
+              Driver.findOne({ name : "Kraut" })
+                .then((driver) => {
+                  assert(driver.driving === true);
+                  done();
+                });
+            });
+        });
+
+
+    });
 });
