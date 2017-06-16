@@ -7,12 +7,16 @@
 const mongoose = require('mongoose');
 
 before(done => {
-  mongoose.connect('mongodb://localhost/expose_api_test');
-  mongoose.connection
-    .once('open', () => done())
-    .on('error', () => {
-      console.log('warning: ',err);
-    });
+  if(mongoose.connection.db) {
+    done();
+  } else {
+    mongoose.connect('mongodb://localhost/expose_api_test');
+    mongoose.connection
+      .once('open', () => done())
+      .on('error', () => {
+        console.log('warning: ',err);
+      });
+  }
 });
 
 beforeEach(done => {
