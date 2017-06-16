@@ -38,6 +38,16 @@ module.exports = {
   },
 
   delete(req, res, next) {
+//what to update
+    const driverId = req.params.id;
+    //where to update
+    const driverProps = req.body;
 
-  }
+    Driver
+    //http://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove
+      .findOneAndRemove({ _id : driverId}, driverProps)
+      .then(() => Driver.findById({ _id : driverId}))
+      .then(driver => res.send(driver))
+      .catch(next);
+    }
 };

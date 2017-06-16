@@ -7,6 +7,7 @@
 const mongoose = require('mongoose');
 
 before(done => {
+
   if(mongoose.connection.db) {
     done();
   } else {

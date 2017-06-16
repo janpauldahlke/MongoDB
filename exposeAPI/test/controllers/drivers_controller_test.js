@@ -40,8 +40,8 @@ describe('Drivers Controller', () => {
       //create driver and test against him on update
       //driving flag is default falsy
       const driver = new Driver({name: "Kraut", email:"rüben@kraut.de"});
-      driver.save().
-        then(() => {
+      driver.save()
+        .then(() => {
           request(app)
             //reflect id
             //.put('/api/drivers/'+driver._id)
@@ -56,7 +56,22 @@ describe('Drivers Controller', () => {
                 });
             });
         });
+    });
 
 
+    it('DELETE to /api/drivers/:id deletes the record', (done) => {
+      const driver = new Driver({name : "ToBe Killed", email: "mail@mail.com"});
+      driver.save()
+        .then(() => {
+          request(app)
+            .delete(`/api/drivers/${driver._id}`)
+            .end(() => {
+              Driver.findOne({name : "ToBe Killed" })
+                .then((driver) => {
+                  assert(!driver);
+                  done();
+                });
+            });
+        });
     });
 });
