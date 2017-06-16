@@ -23,6 +23,8 @@ before(done => {
 beforeEach(done => {
   const { drivers } = mongoose.connection.collections;
   drivers.drop()
+    //to prevent test db from dropping indeces fpr geoLoc
+    .then(() => drivers.ensureIndex({ 'geometry.coordinates' : '2dsphere'}))
     .then(() => done())
     //catch first usage of DB, there will be no collection yet
     .catch(() => done());

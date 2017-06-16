@@ -11,7 +11,8 @@ module.exports = {
     const { lng, lat } = req.query; //query string from URL http://foo.com?lng=500&lat200 example
 
     Driver.geoNear(
-      { type: 'Point', coordinates : [lng, lat] },
+      //express pulls out string of lat and long declaration
+      { type: 'Point', coordinates : [parseFloat(lng), parseFloat(lng)] },
       { spherical : true, maxDistance/*in meters*/: 50000 }
     )
     .then(driver => { res.send(driver)} )

@@ -29,6 +29,7 @@ const DriverSchema = new Schema({
     default: false
   },
 
+  geometry : PointSchema
   //contemplate!
   //location // LAG // bonus challenge
   //https://docs.mongodb.com/manual/reference/geojson/
@@ -40,7 +41,7 @@ const DriverSchema = new Schema({
   // versus https://docs.mongodb.com/manual/core/2d // flat world
 
   //as subdocument
-  geometry : PointSchema
+
 });
 
 const Driver = mongoose.model('driver', DriverSchema);
