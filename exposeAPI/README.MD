@@ -8,3 +8,9 @@ expose an API from Node Backend to whatever Frontend
 - split code as logical representation into folders/files
 - having fun with routing
 - CRUD onto mongoose
+
+
+clone or dl repo
+- `npm install`
+- `npm run test` -> mocha watcher / hf wrting tests
+- `npm run start` -> start server on localhost:1337
