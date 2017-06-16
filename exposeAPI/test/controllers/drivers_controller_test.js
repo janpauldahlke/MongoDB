@@ -76,6 +76,30 @@ describe('Drivers Controller', () => {
     });
 
     it('GET to /api/drivers find driver near given location', (done) => {
-      
+      //hamburg 53.5511° N, 9.9937° (LAT/LON format)
+      //frankfurt 50.1109° N, 8.6821° E (LAT/LON format)
+      const hamburgDriver = new Driver({
+        name: 'Paul',
+        email: 'mail@mail.com',
+        geometry : {type: 'Point', coordinates : [9.9937, 53.5511 ]}
+      });
+
+      const frankfurtDriver = new Driver({
+        name: 'Hans',
+        email: 'hansl@mail.com',
+        geometry : {type: 'Point', coordinates : [8.6821, 50.1109 ]}
+      });
+
+      Promise.all([hamburgDriver.save(), frankfurtDriver.save()])
+        .then(() => {
+          request(app)
+            //find hamburg
+            .get('/api/drivers?lng=9.95&lat=53.20')
+            .end((err, response) => {
+              console.log(response);
+              done();
+            })
+        });
+
     });
 });
