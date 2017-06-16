@@ -74,4 +74,8 @@ describe('Drivers Controller', () => {
             });
         });
     });
+
+    it('GET to /api/drivers find driver near given location', (done) => {
+      
+    });
 });

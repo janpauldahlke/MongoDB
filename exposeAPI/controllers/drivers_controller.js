@@ -5,9 +5,17 @@ const Driver = require('../models/driver');
 
 
 module.exports = {
+  //TODO rewrite into location
+  //https://docs.mongodb.com/manual/reference/command/geoNear/
+  index(req, res, next) {
+    const { lng, lat } = req.query; //query string from URL http://foo.com?lng=500&lat200 example
 
-  index(req, res) {
-    res.sendFile('index.html', {"root": appDir});
+    Driver.geoNear(
+      { type: 'Point', coordinates : [lng, lat] },
+      { spherical : true, maxDistance/*in meters*/: 50000 }
+    )
+    .then(driver => { res.send(driver)} )
+    .catch(next);
   },
 
   helloWorld(req, res) {
@@ -47,7 +55,7 @@ module.exports = {
     //http://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove
       .findOneAndRemove({ _id : driverId}, driverProps)
       .then(() => Driver.findById({ _id : driverId}))
-      .then(driver => res.send(driver))
+      .then(driver => res.status(204).send(driver))
       .catch(next);
     }
 };
