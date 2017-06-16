@@ -14,3 +14,11 @@ before(done => {
       console.log('warning: ',err);
     });
 });
+
+beforeEach(done => {
+  const { drivers } = mongoose.connection.collections;
+  drivers.drop()
+    .then(() => done())
+    //catch first usage of DB, there will be no collection yet
+    .catch(() => done());
+});
