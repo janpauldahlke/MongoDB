@@ -15,6 +15,7 @@ module.exports = {
   },
 
   //! implement npm body-parser
+  //test this with postman
   create(req, res){
     const driverProps = req.body;
     Driver.create(driverProps)
