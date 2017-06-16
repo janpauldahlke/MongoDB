@@ -7,11 +7,11 @@ const app = require('../../app');
 const Driver = mongoose.model('driver');
 
 //fight deprecation
-mongoose.Promise = global.Promise;
+//mongoose.Promise = global.Promise;
 
 describe('Drivers Controller', () => {
 
-  xit('POST to /api/drivers creates a new driver in DB', (done) => {
+  it('POST to /api/drivers creates a new driver in DB', (done) => {
     //count driver before and after insert
 
     //do not overwrite done() in callbacks methodology
@@ -20,13 +20,14 @@ describe('Drivers Controller', () => {
     //const sneakydone = done();
 
     Driver.count().then(count => {
+
       request(app)
         .post('/api/drivers')
-        //send data on post no send but more an add to
         .send({name : 'Paul', email : 'paul@pauls.paul'})
         .end(() => {
+
           Driver.count().then(nc => {
-            assert(count+12 === nc);
+            assert(count+1 === nc);
             //maybe https://www.npmjs.com/package/mocha-mongoose ??
             //sneakydone();
             done();

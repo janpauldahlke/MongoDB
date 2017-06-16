@@ -15,13 +15,9 @@ module.exports = {
   },
 
   //! implement npm body-parser
-
-
   create(req, res){
-    //why is this console log NULL or empty?
-
-    console.log(req.body);
-    res.send({body : 'logga'});
-
+    const driverProps = req.body;
+    Driver.create(driverProps)
+      .then(driver => res.send(driver));
   }
 };
